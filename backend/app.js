@@ -13,6 +13,8 @@ const mongoose = require('mongoose');
 
 //---------
 const userRoutes = require('./api/routes/userRoutes');
+const movieRoutes = require('./api/routes/movieRoutes');
+const qrcodeRoutes = require('./api/routes/qrcodeRoutes');
 
 // MongoDB atlas connection
 
@@ -62,6 +64,8 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/api/users', userRoutes);
+app.use('/api/movies', movieRoutes);
+app.use('/api/qrcode', qrcodeRoutes);
 
 // Handling errors
 
