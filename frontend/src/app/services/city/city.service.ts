@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CityService {
 
   /* -------- */
-  private API_URL = environment.API_URL + "/cinema-service/";
+  private API_URL = environment.API_URL + "/api/cities";
 
 
   /* ----- */
@@ -17,7 +17,7 @@ export class CityService {
   /* ------------- */
   getAllCities() {
     
-    return this.httpClient.get(this.API_URL + "city",
+    return this.httpClient.get(this.API_URL,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -32,7 +32,7 @@ export class CityService {
   /* ------------- */
   createCity(city) {
 
-    return this.httpClient.post(this.API_URL + "city" ,
+    return this.httpClient.post(this.API_URL ,
     JSON.stringify(city) ,
       {
         headers:  new HttpHeaders()

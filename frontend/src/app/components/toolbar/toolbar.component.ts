@@ -35,6 +35,15 @@ export class ToolbarComponent implements OnInit {
 
         resolve(response);
 
+        this.app.error = true; 
+        this.app.email = null; 
+        this.app.status = 'NOT AUTHORIZED';
+        this.app.username = '*** NONE ***'; 
+        this.app.role = null;
+        
+        this.storage.set("app", this.app);
+        this.router.navigate(['/home']);
+
       } ,
       err => {
         reject(err);

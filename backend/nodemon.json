@@ -2,6 +2,7 @@
     "env": {
         "MONGO_ATLAS_PASSWORD": "mounach",
         "JWT_KEY": "mounach",
+        "SESSION_KEY": "mounach",
         "THEMOVIEDB_KEY": "a6967dfebc336586896d857fe4984a8c"
     }
 }

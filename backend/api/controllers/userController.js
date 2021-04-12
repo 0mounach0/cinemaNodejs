@@ -9,6 +9,8 @@ const bcrypt = require("bcryptjs");
 //---
 const jwt = require("jsonwebtoken");
 
+var session = require('express-session');
+
 module.exports = {
   getAll: async (req, res, next) => {
     await User.find()
@@ -29,9 +31,9 @@ module.exports = {
       });
   },
   getOne: async (req, res, next) => {
-    const id = req.params.id;
-    await User.findById(id)
-      .select("id username email fisrtname lastname")
+    const _id = req.params.id;
+    await User.findById(_id)
+      .select("_id username email fisrtname lastname")
       .exec()
       .then(doc => {
         console.log("From database", doc);
@@ -66,7 +68,7 @@ module.exports = {
               });
             } else {
               const user = new User({
-                id: new mongoose.Types.ObjectId(),
+                _id: new mongoose.Types.ObjectId(),
                 username: req.body.username,
                 email: req.body.email,
                 password: hash,
@@ -95,7 +97,7 @@ module.exports = {
       });
   },
   loginUser: async (req, res, next) => {
-    User.find({ email: req.body.email })
+    User.find({ username: req.body.username })
     .exec()
     .then(user => {
       if (user.length < 1) {
@@ -110,22 +112,26 @@ module.exports = {
           });
         }
         if (result) {
-          const token = jwt.sign(
-            {
-              email: user[0].email,
-              userId: user[0].id,
-              role: user[0].role
-            },
-            process.env.JWT_KEY,
-            {
-                expiresIn: "1h"
-            }
-          );
+
+          req.session.user = {
+                          _id: user[0]._id,
+                          firstname: user[0].firstname,
+                          lastname: user[0].lastname,
+                          email: user[0].email,
+                          username: user[0].username,
+                          role: user[0].role
+                        };
+
           return res.status(200).json({
             message: "Auth successful",
-            token: token,
-            user : user[0]
-
+            user : {
+              _id: user[0]._id,
+              firstname: user[0].firstname,
+              lastname: user[0].lastname,
+              email: user[0].email,
+              username: user[0].username,
+              role: user[0].role
+            }
           });
         }
         res.status(401).json({
@@ -159,9 +165,50 @@ module.exports = {
       });
         });
   },
-  logout: async (req, res, next) => { 
+  logoutUser: async (req, res, next) => {
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(409).json({
+          message: "Logout failed"
+        });
+      }
+      res.status(200).json({
+        message: "Logout successful"
+      });
+    });
+  },
+  isLogged: async (req, res, next) => {
 
-
+    if(!req.session.user){
+      return res.status(200).json({
+              message: "Is Not Logged",
+              isLogged: false,
+              status: "NOT LOGGED"
+            });
+    }else{
+      await User.findById(req.session.user._id)
+      .select("_id username email fisrtname lastname role")
+      .exec()
+      .then(doc => {
+        if (doc) {
+          res.status(200).json({
+            user: doc,
+            isLogged: true,
+            status: "LOGGED"
+          });
+        } else {
+          res.status(400).json({
+            message: 'No valide entry found for provided session',
+            isLogged: false,
+            status: "NOT LOGGED"
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      });
+    }
     
   }
 };

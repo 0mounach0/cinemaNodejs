@@ -46,12 +46,12 @@ export class HomeComponent implements OnInit {
 
       L.marker([+c.latitude, +c.longitude], {icon: myIcon})
        .bindPopup(
-         '<div class="cine_'+c.id+'" onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;"><a'+
-         ' class="cine_'+c.id+'" style="color: rgb(71, 71, 71);cursor: pointer;font-size: 2em;text-decoration: none;">'+
+         '<div class="cine_'+c._id+'" onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;"><a'+
+         ' class="cine_'+c._id+'" style="color: rgb(71, 71, 71);cursor: pointer;font-size: 2em;text-decoration: none;">'+
           c.name.toString()
         +'<a></br>'+
-        '<a style="cursor: pointer;" class="cine_'+c.id+'">'+
-        '<img class="cine_'+c.id+'" style="display: block;margin-left: auto;margin-right: auto;" src="../../../assets/cinema.png" width="150" alt="cinema">'
+        '<a style="cursor: pointer;" class="cine_'+c._id+'">'+
+        '<img class="cine_'+c._id+'" style="display: block;margin-left: auto;margin-right: auto;" src="../../../assets/cinema.png" width="150" alt="cinema">'
         +'</a></div>'
        )
        .addTo(cinemaMap)
@@ -85,8 +85,8 @@ export class HomeComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getAllCinemas()
      .subscribe((response: any) => {
-       //console.log(response);
-       this.cinemas = response.body;
+       console.log(response);
+       this.cinemas = response.body.cinemas;
        resolve(response);
        } ,
      err => {

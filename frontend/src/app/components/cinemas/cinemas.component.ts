@@ -94,7 +94,7 @@ export class CinemasComponent implements OnInit {
       this.cinemaService.getAllCinemas()
      .subscribe((response: any) => {
        //console.log(response);
-       this.cinemas = response.body;
+       this.cinemas = response.body.cinemas;
        resolve(response);
        } ,
      err => {
@@ -113,7 +113,7 @@ export class CinemasComponent implements OnInit {
       this.cityService.getAllCities()
      .subscribe((response: any) => {
        //console.log(response);
-       this.cities = response.body;
+       this.cities = response.body.cities;
        resolve(response);
        } ,
      err => {

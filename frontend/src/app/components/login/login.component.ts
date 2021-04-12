@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.isLogged();
   }
 
   loginService(){
@@ -48,24 +49,14 @@ export class LoginComponent implements OnInit {
 
      this.loginService().then((response: any) => {
 
-      if(response.body.status == "success") {
+      if(response.body.message == "Auth successful") {
 
-        this.getUser().then((data: any) => {
-
-          this.app.username = data.body.username;
-          this.app.email = data.body.email;
-          this.app.role = data.body.role;
-          this.app.status = data.body.status;
-
-          this.storage.set("app", this.app);
-
-          this.router.navigate(['/cinemas']);
-        });
+        this.isLogged();
 
       }
 
     }).catch((err: any) => {
-      //console.log(err);
+      console.log(err);
     }); 
 
   }
@@ -86,6 +77,25 @@ export class LoginComponent implements OnInit {
     });
     
     return promise;
+  }
+
+  isLogged(){
+    this.getUser().then((data: any) => {
+
+      if(data.body.isLogged == true) {
+
+          this.app.username = data.body.user.username;
+          this.app.email = data.body.user.email;
+          this.app.role = data.body.user.role;
+          this.app.status = data.body.status;
+
+          this.storage.set("app", this.app);
+
+          this.router.navigate(['/cinemas']);
+
+      }
+      
+    });
   }
 
 }

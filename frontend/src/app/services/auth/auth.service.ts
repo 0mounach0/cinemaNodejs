@@ -9,25 +9,28 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private API_URL = environment.API_URL + '/';
+  private API_URL = environment.API_URL + '/api/users';
 
   login (user) {
-    const body = new HttpParams()
-      .set('username', user.username)
-      .set('password', user.password);
+    const body = {
+      'username': user.username,
+      'password': user.password
+    };
 
-    return this.httpClient.post(this.API_URL + 'login',
-      body.toString(),
-      {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
-        observe: 'response',
-        withCredentials: true
-      }
+    return this.httpClient.post(this.API_URL + '/login',
+        JSON.stringify(body),
+        {
+          headers:  new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json'),
+          observe: 'response',
+          withCredentials: true
+        }
     );
   }
 
   getUser() {
-    return this.httpClient.get(this.API_URL + "user",
+    return this.httpClient.get(this.API_URL + "/isLogged",
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -39,7 +42,7 @@ export class AuthService {
   }
 
   logout() {
-    return this.httpClient.post(this.API_URL + "logout",
+    return this.httpClient.post(this.API_URL + "/logout",
     null,
     {
       headers:  new HttpHeaders()

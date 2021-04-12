@@ -11,8 +11,12 @@ const bodyParser = require('body-parser');
 // Mongoose
 const mongoose = require('mongoose');
 
+var session = require('express-session');
+
 //---------
 const userRoutes = require('./api/routes/userRoutes');
+const cityRoutes = require('./api/routes/cityRoutes');
+const cinemaRoutes = require('./api/routes/cinemaRoutes');
 const movieRoutes = require('./api/routes/movieRoutes');
 const qrcodeRoutes = require('./api/routes/qrcodeRoutes');
 
@@ -45,27 +49,45 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Handling CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-        'Access-Control-Allow-Headers', 
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
+app.use(function (req, res, next) {
 
-    if (req.method === 'OPTIONS') {
-        res.header(
-            'Access-Control-Allow-Methods',
-            'PUT, POST, DELETE, GET, PATCH'
-        );
-        return res.status(200).json({});
-    }
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
     next();
 });
 
+// express-session 
+app.use(session({
+    key: 'user',
+    secret: process.env.SESSION_KEY,
+    name:'uniqueSessionID',
+    cookie: {
+        expires: 600000
+    },
+    resave: false,
+    saveUninitialized: false,
+}));
+
 // routes
 app.use('/api/users', userRoutes);
+app.use('/api/cities', cityRoutes);
+app.use('/api/cinemas', cinemaRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/qrcode', qrcodeRoutes);
+
+
 
 // Handling errors
 

@@ -178,7 +178,7 @@ export class SessionComponent implements OnInit {
   }
 
   go_back() {
-    this.router.navigate(['/cinema/'+this.session.theater.cinema.id+'/sessions']);
+    this.router.navigate(['/cinema/'+this.session.theater.cinema._id+'/sessions']);
   }
 
   //-----------------paypal----------------------
