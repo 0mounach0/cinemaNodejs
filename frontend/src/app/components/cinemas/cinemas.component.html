@@ -38,7 +38,7 @@
                                 <select class="form-control" id="city" name="city" 
                                   [(ngModel)]="selectedCity" *ngIf="cityExist == true">
                                   <option value="0">Select-a-city</option>
-                                  <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                                  <option *ngFor="let city of cities" [value]="city._id">{{city.name}}</option>
                                 </select>
                                 <input type="text" class="form-control" name="city_name" *ngIf="cityExist == false" 
                                   id="city_name" placeholder="City name" [(ngModel)]="newCity.name">
@@ -70,12 +70,12 @@
         <ng-container *ngFor="let cinema of cinemas">
     
             <mat-card class="card">
-                <mat-card-header [routerLink]="'/cinema/' + cinema.id + '/settings'">
+                <mat-card-header [routerLink]="'/cinema/' + cinema._id + '/settings'">
                   <mat-card-title >{{cinema.name}}</mat-card-title>
                   <mat-card-subtitle>{{cinema.city.name}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content fxLayout="column" fxLayoutAlign="start center" 
-                          [routerLink]="'/cinema/' + cinema.id + '/settings'">
+                          [routerLink]="'/cinema/' + cinema._id + '/settings'">
                   <img src="../../../assets/cinema.png" class="cine_img" alt="cinema">
                 </mat-card-content>
                 <mat-card-actions>
@@ -89,7 +89,7 @@
                               </button>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-outline-danger" (click)="deleteCinema(cinema.id)">Confirm delete</button>
+                              <button type="button" class="btn btn-outline-danger" (click)="deleteCinema(cinema._id)">Confirm delete</button>
                             </div>
                           </ng-template>
                           
@@ -119,7 +119,7 @@
                                   <select class="form-control" id="city" name="city" 
                                     [(ngModel)]="selectedCity" *ngIf="cityExist == true">
                                     <option value="0">Select-a-city</option>
-                                    <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                                    <option *ngFor="let city of cities" [value]="city._id">{{city.name}}</option>
                                   </select>
                                   <input type="text" class="form-control" name="city_name" *ngIf="cityExist == false" 
                                     id="city_name" placeholder="City name" [(ngModel)]="newCity.name">

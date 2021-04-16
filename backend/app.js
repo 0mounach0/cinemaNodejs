@@ -17,6 +17,7 @@ var session = require('express-session');
 const userRoutes = require('./api/routes/userRoutes');
 const cityRoutes = require('./api/routes/cityRoutes');
 const cinemaRoutes = require('./api/routes/cinemaRoutes');
+const theaterRoutes = require('./api/routes/theaterRoutes');
 const movieRoutes = require('./api/routes/movieRoutes');
 const qrcodeRoutes = require('./api/routes/qrcodeRoutes');
 
@@ -84,6 +85,7 @@ app.use(session({
 app.use('/api/users', userRoutes);
 app.use('/api/cities', cityRoutes);
 app.use('/api/cinemas', cinemaRoutes);
+app.use('/api/theaters', theaterRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/qrcode', qrcodeRoutes);
 

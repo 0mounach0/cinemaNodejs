@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class TheaterService {
 
   /* -------- */
-  private API_URL = environment.API_URL + "/cinema-service/";
+  private API_URL = environment.API_URL + "/api/theaters";
 
 
   /* ----- */
@@ -18,7 +18,7 @@ export class TheaterService {
   /* ------------- */
   createTheater(theater) {
 
-    return this.httpClient.post(this.API_URL + "theater" ,
+    return this.httpClient.post(this.API_URL ,
     JSON.stringify(theater) ,
       {
         headers:  new HttpHeaders()
@@ -34,7 +34,7 @@ export class TheaterService {
   /* ------------- */
   updateTheater(theater) {
 
-    return this.httpClient.put(this.API_URL + "theater/" + theater.id ,
+    return this.httpClient.put(this.API_URL + "/" + theater._id ,
     JSON.stringify(theater) ,
       {
         headers:  new HttpHeaders()
@@ -51,7 +51,7 @@ export class TheaterService {
   /* ------------- */
   deleteTheater(id) {
     
-    return this.httpClient.delete(this.API_URL + "theater/" + id,
+    return this.httpClient.delete(this.API_URL + "/" + id,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')

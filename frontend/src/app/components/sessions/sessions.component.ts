@@ -109,7 +109,7 @@ export class SessionsComponent implements OnInit {
   /* ------------------ */
   getTheaterObjectById(id) {
     this.session.theater = this.theaters.filter(
-      c => c.id == id
+      c => c._id == id
     )[0];
   }
 

@@ -16,8 +16,8 @@ router.post('/signup', userController.newUser);
 router.post('/login', userController.loginUser);
 router.post('/logout', userController.logoutUser);
 
-//----patch-----
-router.patch('/:id', userController.updateUser);
+//----put-----
+router.put('/:id', userController.updateUser);
 
 //----delete----
 

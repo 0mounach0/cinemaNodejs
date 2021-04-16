@@ -34,14 +34,21 @@ export class CinemaComponent implements OnInit {
 
   ngOnInit() {
 
-    
-
     this.getUser().then((data: any) => {
       
-      this.cinema_id = this.route.snapshot.paramMap.get("id");
-      //console.log(this.cinema_id);
-
-      this.getCinemaInfos();
+      if(data.body.isLogged == true) {
+        this.cinema_id = this.route.snapshot.paramMap.get("id");
+        this.getCinemaInfos();
+      }else{
+        this.app.error = true; 
+        this.app.email = null; 
+        this.app.status = 'NOT AUTHORIZED';
+        this.app.username = '*** NONE ***'; 
+        this.app.role = null;
+        
+        this.storage.set("app", this.app);
+        this.router.navigate(['/home']);
+      }
 
     }).catch(err => {
         this.app.error = true; 
@@ -83,7 +90,7 @@ export class CinemaComponent implements OnInit {
       this.cinemaService.getOneCinema(this.cinema_id)
      .subscribe((response: any) => {
        //console.log(response);
-       this.cinema = response.body;
+       this.cinema = response.body.cinema;
        resolve(response);
        } ,
      err => {

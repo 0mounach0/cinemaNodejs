@@ -13,8 +13,8 @@ router.get('/:id', cityController.getOne);
 //----post----
 router.post('/', cityController.newCity);
 
-//----patch-----
-router.patch('/:id', cityController.updateCity);
+//----put-----
+router.put('/:id', cityController.updateCity);
 
 //----delete----
 router.delete('/:id', cityController.deleteCity);

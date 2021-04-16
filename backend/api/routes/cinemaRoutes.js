@@ -9,12 +9,13 @@ router.get('/', cinemaController.getAll);
 
 //---get by id----
 router.get('/:id', cinemaController.getOne);
+router.get('/:id/theaters', cinemaController.getCinemaTheaters);
 
 //----post----
 router.post('/', cinemaController.newCinema);
 
-//----patch-----
-router.patch('/:id', cinemaController.updateCinema);
+//----put-----
+router.put('/:id', cinemaController.updateCinema);
 
 //----delete----
 router.delete('/:id', cinemaController.deleteCinema);

@@ -169,5 +169,27 @@ module.exports = {
         city.cinemas.pull(cinema);
         await city.save();
 
+  },
+  getCinemaTheaters: async (req, res, next) => {
+    const _id = req.params.id;
+    await Cinema.findById(_id)
+      .select("_id name theaters")
+      .populate("theaters")
+      .exec()
+      .then(doc => {
+        if (doc) {
+          res.status(200).json({
+            theaters: doc.theaters
+          });
+        } else {
+          res.status(400).json({
+            message: 'No valide entry found for provided ID'
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      });
   }
 };

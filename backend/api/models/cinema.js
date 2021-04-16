@@ -10,7 +10,13 @@ const cinemaSchema = mongoose.Schema({
     city: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "City"
-    }
+    },
+    theaters: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Theater"
+      }
+    ]
 });
 
 module.exports = mongoose.model('Cinema', cinemaSchema);

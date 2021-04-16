@@ -33,7 +33,7 @@ export class CinemaService {
   /* ------------- */
   getCinemaTheaters(id) {
     
-    return this.httpClient.get(this.API_URL + "cinema/" + id + "/theaters",
+    return this.httpClient.get(this.API_URL + "/" + id + "/theaters",
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -79,7 +79,7 @@ export class CinemaService {
   /* ------------- */
   getOneCinema(id) {
     
-    return this.httpClient.get(this.API_URL + "cinema/" + id ,
+    return this.httpClient.get(this.API_URL + "/" + id ,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -95,7 +95,7 @@ export class CinemaService {
   /* ------------- */
   deleteCinema(id) {
     
-    return this.httpClient.delete(this.API_URL + "cinema/" + id,
+    return this.httpClient.delete(this.API_URL + "/" + id,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -110,7 +110,7 @@ export class CinemaService {
   /* ------------- */
   createCinema(cinema) {
 
-    return this.httpClient.post(this.API_URL + "cinema" ,
+    return this.httpClient.post(this.API_URL,
     JSON.stringify(cinema) ,
       {
         headers:  new HttpHeaders()
@@ -126,7 +126,7 @@ export class CinemaService {
   /* ------------- */
   updateCinema(cinema) {
 
-    return this.httpClient.put(this.API_URL + "cinema/" + cinema.id ,
+    return this.httpClient.put(this.API_URL + "/" + cinema._id ,
     JSON.stringify(cinema) ,
       {
         headers:  new HttpHeaders()

@@ -51,8 +51,18 @@ export class CinemasComponent implements OnInit {
 
     this.getUser().then((data: any) => {
       
-      this.getAllCinemas();
-      this.getAllCities();
+      if(data.body.isLogged == true) {
+        this.getAllCinemas();
+        this.getAllCities();
+      }else{
+        this.app.email = null; 
+        this.app.status = 'NOT AUTHORIZED';
+        this.app.username = '*** NONE ***'; 
+        this.app.role = null;
+        
+        this.storage.set("app", this.app);
+        this.router.navigate(['/home']);
+      }
 
     }).catch(err => {
         this.app.error = true; 
@@ -142,6 +152,8 @@ export class CinemasComponent implements OnInit {
     this.modalService.open(content, { size: 'lg', scrollable: true });
     this.getAllCities();
     this.cityExist = true;
+    this.selectedCity = "0";
+    this.cinema = new Cinema();
   }
 
   openUpdateModal(content, c) {
@@ -149,7 +161,7 @@ export class CinemasComponent implements OnInit {
     this.getAllCities();
     this.cityExist = true;
     this.cinema = c;
-    this.selectedCity = c.city.id;
+    this.selectedCity = c.city._id;
   }
 
   /* ----------------------- */
@@ -182,7 +194,7 @@ export class CinemasComponent implements OnInit {
       });
     } else {
       this.createCityService().then((res: any) => {
-        this.cinema.city = res.body;
+        this.cinema.city = res.body.createdCity;
         this.createCinemaService().then((res: any) => {
           this.modalService.dismissAll();
           this.getAllCinemas();
@@ -204,7 +216,7 @@ export class CinemasComponent implements OnInit {
       });
     } else {
       this.createCityService().then((res: any) => {
-        this.cinema.city = res.body;
+        this.cinema.city = res.body.createdCity;
         this.updateCinemaService().then((res: any) => {
           this.modalService.dismissAll();
           this.getAllCinemas();
@@ -217,7 +229,7 @@ export class CinemasComponent implements OnInit {
   /* ------------------ */
   getCityObjectById(id) {
     this.cinema.city = this.cities.filter(
-      c => c.id == id
+      c => c._id == id
     )[0];
   }
 

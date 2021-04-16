@@ -1,7 +1,7 @@
 import { Theater } from '../theater/theater';
 
 export class Session {
-    id?: String;
+    _id?: String;
     original_title?: String;
     overview?: String;
     poster_path?: String;

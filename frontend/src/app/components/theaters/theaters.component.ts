@@ -47,7 +47,7 @@ export class TheatersComponent implements OnInit {
       this.cinemaService.getCinemaTheaters(this.cinema_id)
      .subscribe((response: any) => {
        //console.log(response);
-       this.theaters = response.body;
+       this.theaters = response.body.theaters;
        resolve(response);
        } ,
      err => {
@@ -66,7 +66,7 @@ export class TheatersComponent implements OnInit {
       this.cinemaService.getOneCinema(this.cinema_id)
      .subscribe((response: any) => {
        //console.log(response);
-       this.cinema = response.body;
+       this.cinema = response.body.cinema;
        resolve(response);
        } ,
      err => {

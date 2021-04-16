@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class MovieService {
 
   /* -------- */
-  private API_URL = environment.API_URL + "/movies-service/";
+  private API_URL = environment.API_URL + "/api/movies";
 
 
   /* ----- */
@@ -18,7 +18,7 @@ export class MovieService {
   /* ------------- */
   searchMovies(query) {
     
-    return this.httpClient.get(this.API_URL + "movie/search/" + query,
+    return this.httpClient.get(this.API_URL + "?query=" + query,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
