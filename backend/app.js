@@ -18,6 +18,7 @@ const userRoutes = require('./api/routes/userRoutes');
 const cityRoutes = require('./api/routes/cityRoutes');
 const cinemaRoutes = require('./api/routes/cinemaRoutes');
 const theaterRoutes = require('./api/routes/theaterRoutes');
+const sessionRoutes = require('./api/routes/sessionRoutes');
 const movieRoutes = require('./api/routes/movieRoutes');
 const qrcodeRoutes = require('./api/routes/qrcodeRoutes');
 
@@ -64,6 +65,7 @@ app.use(function (req, res, next) {
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true);
+    
 
     // Pass to next layer of middleware
     next();
@@ -86,6 +88,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/cities', cityRoutes);
 app.use('/api/cinemas', cinemaRoutes);
 app.use('/api/theaters', theaterRoutes);
+app.use('/api/sessions', sessionRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/qrcode', qrcodeRoutes);
 
