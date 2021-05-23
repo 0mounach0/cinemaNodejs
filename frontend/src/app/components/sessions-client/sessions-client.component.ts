@@ -46,7 +46,7 @@ export class SessionsClientComponent implements OnInit {
       this.cinemaService.getOneCinema(this.cinema_id)
      .subscribe((response: any) => {
        //console.log(response);
-       this.cinema = response.body;
+       this.cinema = response.body.cinema;
        resolve(response);
        } ,
      err => {
@@ -65,7 +65,7 @@ export class SessionsClientComponent implements OnInit {
       this.cinemaService.getCinemaSessionByDate(this.cinema_id, start_date, end_date)
      .subscribe((response: any) => {
        //console.log(response);
-       this.sessions = response.body;
+       this.sessions = response.body.sessions;
        resolve(response);
        } ,
      err => {

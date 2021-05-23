@@ -204,5 +204,27 @@ module.exports = {
         console.log(err);
         res.status(500).json({ error: err });
       });
+  },
+  getSessionTickets: async (req, res, next) => {
+    const _id = req.params.id;
+    await Session.findById(_id)
+      .select("_id tickets")
+      .populate("tickets")
+      .exec()
+      .then(doc => {
+        if (doc) {
+          res.status(200).json({
+            tickets: doc.tickets
+          });
+        } else {
+          res.status(400).json({
+            message: 'No valide entry found for provided ID'
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      });
   }
 };

@@ -73,7 +73,7 @@ export class SessionComponent implements OnInit {
       this.sessionService.getOneSession(this.session_id)
      .subscribe((response: any) => {
        //console.log(response);
-       this.session = response.body;
+       this.session = response.body.session;
        resolve(response);
        } ,
      err => {
@@ -92,7 +92,7 @@ export class SessionComponent implements OnInit {
       this.sessionService.getSessionTickets(this.session_id)
      .subscribe((response: any) => {
        //console.log(response);
-       this.tickets = response.body;
+       this.tickets = response.body.tickets;
        resolve(response);
        } ,
      err => {
@@ -109,7 +109,7 @@ export class SessionComponent implements OnInit {
 
     this.createTicketService().then((res: any) => {
       //this.modalService.dismissAll();
-      this.showQrcode(res.body.id);
+      this.showQrcode(res.body.createdTicket._id);
       this.getSessionTickets();
     });
     
@@ -148,7 +148,10 @@ export class SessionComponent implements OnInit {
   /* ----------------------- */
   createQrcode(t) {
     let promise = new Promise((resolve, reject) => {
-      this.qrcodeService.createQrcode(t)
+      let tmpTicket = {
+        ticket: t
+      };
+      this.qrcodeService.createQrcode(tmpTicket)
      .subscribe((response: any) => {
        resolve(response);
        } ,
@@ -166,12 +169,13 @@ export class SessionComponent implements OnInit {
 
     this.createQrcode(t).then((res: any)=> {
 
-  
-      var reader = new FileReader();      
+      this.imgURL = res.body; 
+
+      /* var reader = new FileReader();      
       reader.readAsDataURL(res.body); 
       reader.onload = (_event) => { 
         this.imgURL = reader.result; 
-      }
+      } */
 
     });
 

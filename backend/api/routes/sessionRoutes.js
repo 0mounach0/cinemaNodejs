@@ -9,6 +9,7 @@ router.get('/', sessionController.getAll);
 
 //---get by id----
 router.get('/:id', sessionController.getOne);
+router.get('/:id/tickets', sessionController.getSessionTickets);
 
 //----post----
 router.post('/', sessionController.newSession);

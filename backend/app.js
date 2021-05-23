@@ -19,6 +19,7 @@ const cityRoutes = require('./api/routes/cityRoutes');
 const cinemaRoutes = require('./api/routes/cinemaRoutes');
 const theaterRoutes = require('./api/routes/theaterRoutes');
 const sessionRoutes = require('./api/routes/sessionRoutes');
+const ticketRoutes = require('./api/routes/ticketRoutes');
 const movieRoutes = require('./api/routes/movieRoutes');
 const qrcodeRoutes = require('./api/routes/qrcodeRoutes');
 
@@ -89,6 +90,7 @@ app.use('/api/cities', cityRoutes);
 app.use('/api/cinemas', cinemaRoutes);
 app.use('/api/theaters', theaterRoutes);
 app.use('/api/sessions', sessionRoutes);
+app.use('/api/tickets', ticketRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/qrcode', qrcodeRoutes);
 

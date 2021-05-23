@@ -52,7 +52,7 @@
     
             <ng-container *ngFor="let session of sessions">
         
-                <div class="card mb-3 card-session" (click)="gotoSession(session.id)">
+                <div class="card mb-3 card-session" (click)="gotoSession(session._id)">
                   <div class="row no-gutters">
                     <div class="col-4">
                       <img [src]="'https://image.tmdb.org/t/p/w500'+session.poster_path" 

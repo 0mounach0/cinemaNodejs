@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class SessionService {
 
   /* -------- */
-  private API_URL = environment.API_URL + "/cinema-service/";
+  private API_URL = environment.API_URL + "/api/sessions";
 
 
   /* ----- */
@@ -18,7 +18,7 @@ export class SessionService {
   /* ------------- */
   createSession(session) {
 
-    return this.httpClient.post(this.API_URL + "session" ,
+    return this.httpClient.post(this.API_URL ,
     JSON.stringify(session) ,
       {
         headers:  new HttpHeaders()
@@ -34,7 +34,7 @@ export class SessionService {
   /* ------------- */
   getOneSession(id) {
     
-    return this.httpClient.get(this.API_URL + "session/" + id ,
+    return this.httpClient.get(this.API_URL + "/" + id ,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -49,7 +49,7 @@ export class SessionService {
   /* ------------- */
   getSessionTickets(id) {
     
-    return this.httpClient.get(this.API_URL + "session/" + id + "/tickets" ,
+    return this.httpClient.get(this.API_URL + "/" + id + "/tickets" ,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -61,26 +61,11 @@ export class SessionService {
     
   }
 
-  /* ------------- */
-  updateSession(session) {
-
-    return this.httpClient.put(this.API_URL + "session/" + session.id ,
-    JSON.stringify(session) ,
-      {
-        headers:  new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Accept', 'application/json'),
-        observe: 'response',
-        withCredentials: true
-      }
-    );
-    
-  }
 
   /* ------------- */
   deleteSession(id) {
     
-    return this.httpClient.delete(this.API_URL + "session/" + id,
+    return this.httpClient.delete(this.API_URL + "/" + id,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')

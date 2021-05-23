@@ -48,7 +48,7 @@ export class CinemaService {
   /* ------------- */
   getCinemaSession(id) {
     
-    return this.httpClient.get(this.API_URL + "cinema/" + id + "/sessions",
+    return this.httpClient.get(this.API_URL + "/" + id + "/sessions",
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
@@ -63,7 +63,7 @@ export class CinemaService {
   /* ------------- */
   getCinemaSessionByDate(id, start_date, end_date) {
     
-    return this.httpClient.get(this.API_URL + "cinema/" + id + "/sessions?start_date="+start_date
+    return this.httpClient.get(this.API_URL + "/" + id + "/sessions?start_date="+start_date
                                             +"&end_date="+end_date,
       {
         headers:  new HttpHeaders()

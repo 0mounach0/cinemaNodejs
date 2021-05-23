@@ -1,7 +1,7 @@
 import { Session } from '../session/session';
 
 export class Ticket {
-    id?: String;
+    _id?: String;
     fullname?: String;
     seat_num?: Number;
     session?: Session;

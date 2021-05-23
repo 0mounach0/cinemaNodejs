@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class QrcodeService {
 
   /* -------- */
-  private API_URL = environment.API_URL + "/qrcode-service/";
+  private API_URL = environment.API_URL + "/api/qrcode";
 
 
   /* ----- */
@@ -18,15 +18,13 @@ export class QrcodeService {
   /* ------------- */
   createQrcode(ticket) {
 
-    return this.httpClient.post(this.API_URL + "qrcode" ,
+    return this.httpClient.post(this.API_URL ,
     JSON.stringify(ticket) ,
       {
         headers:  new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Accept', 'image/png'),
-        observe: 'response',
-        responseType: 'blob',
-        withCredentials: true
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json'),
+        observe: 'response'
       }
     );
     

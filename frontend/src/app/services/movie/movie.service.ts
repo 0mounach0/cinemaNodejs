@@ -19,13 +19,13 @@ export class MovieService {
   searchMovies(query) {
     
     return this.httpClient.get(this.API_URL + "?query=" + query,
-      {
-        headers:  new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Accept', 'application/json'),
-        observe: 'response',
-        withCredentials: true
-      }
+    {
+      headers:  new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json'),
+      observe: 'response',
+      //withCredentials: true
+    }
     );
     
   }

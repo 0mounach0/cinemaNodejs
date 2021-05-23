@@ -58,7 +58,7 @@
                         <select class="form-control" id="theater" name="theater" 
                                     [(ngModel)]="selectedTheater">
                                     <option value="0">Select-a-theater</option>
-                                    <option *ngFor="let theater of theaters" [value]="theater.id">{{theater.name}}</option>
+                                    <option *ngFor="let theater of theaters" [value]="theater._id">{{theater.name}}</option>
                         </select>
                       </div>
 
@@ -107,18 +107,18 @@
           <div class="row no-gutters">
             <div class="col-4">
               <img [src]="'https://image.tmdb.org/t/p/w500'+session.poster_path" 
-                     class="card-img-top" alt="..." (click)="gotoSession(session.id)">
+                     class="card-img-top" alt="..." (click)="gotoSession(session._id)">
             </div>
             <div class="col-8">
               <div class="card-body">
                 <h5 class="card-title">{{session.title}}</h5>
                 <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
                   <span fxFlex="30">FROM</span>
-                  <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.startDate}}</span>
+                  <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.startDate | date:'medium'}}</span>
                 </p>
                 <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
                   <span fxFlex="30">TO</span>
-                  <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.endDate}}</span>
+                  <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.endDate | date:'medium'}}</span>
                 </p>
                 <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
                   <span fxFlex="30">PRICE</span>
@@ -149,7 +149,7 @@
                       </button>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-danger" (click)="deleteSession(session.id)">Confirm delete</button>
+                      <button type="button" class="btn btn-outline-danger" (click)="deleteSession(session._id)">Confirm delete</button>
                     </div>
                   </ng-template>
                 </div>

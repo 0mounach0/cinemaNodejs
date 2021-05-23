@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class TicketService {
 
   /* -------- */
-  private API_URL = environment.API_URL + "/cinema-service/";
+  private API_URL = environment.API_URL + "/api/tickets";
 
 
   /* ----- */
@@ -17,7 +17,7 @@ export class TicketService {
   /* ------------- */
   createTicket(ticket) {
 
-    return this.httpClient.post(this.API_URL + "ticket" ,
+    return this.httpClient.post(this.API_URL,
     JSON.stringify(ticket) ,
       {
         headers:  new HttpHeaders()

@@ -54,11 +54,11 @@
                       </p>
                       <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
                         <span fxFlex="30">FROM</span>
-                        <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.startDate}}</span>
+                        <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.startDate | date:'medium'}}</span>
                       </p>
                       <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
                         <span fxFlex="30">TO</span>
-                        <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.endDate}}</span>
+                        <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.endDate | date:'medium'}}</span>
                       </p>
                       <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
                         <span fxFlex="30">PRICE</span>
