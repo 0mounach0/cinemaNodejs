@@ -72,7 +72,7 @@ export class SessionComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.sessionService.getOneSession(this.session_id)
      .subscribe((response: any) => {
-       //console.log(response);
+       console.log(response);
        this.session = response.body.session;
        resolve(response);
        } ,

@@ -74,7 +74,7 @@ export class SessionsComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getCinemaSessionByDate(this.cinema_id, start_date, end_date)
      .subscribe((response: any) => {
-       //console.log(response);
+       console.log(response.body.sessions);
        this.sessions = response.body.sessions;
        resolve(response);
        } ,

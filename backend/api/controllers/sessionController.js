@@ -168,18 +168,22 @@ module.exports = {
                     
                       let tmpTeather = Theater.findById(doc.theaters[i]._id).
                       select("sessions").populate("sessions").exec()
-                      .then((doc)=> { 
+                      .then((docu)=> { 
 
                         if(req.query.start_date && req.query.end_date){
                           var start_date =  Date.parse(req.query.start_date);
                           var end_date =  Date.parse(req.query.end_date);
-                          cinemaSessions.push(...doc.sessions.filter((s)=>{
+                          cinemaSessions.push(...docu.sessions.filter((s)=>{
+                            s.theater = doc.theaters[i];
                             return (s.startDate > start_date && s.startDate < end_date)
                           })); 
                         }else{
-                          cinemaSessions.push(...doc.sessions);
+                          cinemaSessions.push(...docu.sessions.map((s)=> {
+                            s.theater = doc.theaters[i];
+                            return s;
+                          }));
                         }
-                          resolve(doc.sessions);
+                          resolve(docu.sessions);
                       })
                     
                     }  

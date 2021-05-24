@@ -30,6 +30,29 @@ module.exports = {
                 });
             });
     },
+    getOne: async (req, res, next) => {
+        const _id = req.params.id;
+        await Ticket.findById(_id)
+          .select("_id seat_num fullname session")
+          .populate("session")
+          .exec()
+          .then(doc => {
+              console.log(doc);
+            if (doc) {
+              res.status(200).json({
+                ticket: doc
+              });
+            } else {
+              res.status(400).json({
+                message: 'No valide entry found for provided ID'
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+          });
+    },
     newTicket: async (req, res, next) => {
         const ticket = new Ticket({
             _id: new mongoose.Types.ObjectId(),
@@ -72,5 +95,5 @@ module.exports = {
                     error: err
                 });
             });
-      }
+    }
 };

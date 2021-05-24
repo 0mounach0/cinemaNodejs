@@ -8,7 +8,7 @@ const ticketController = require('../controllers/ticketController');
 router.get('/', ticketController.getAll);
 
 //---get by id----
-//router.get('/:id', sessionController.getOne);
+router.get('/:id', ticketController.getOne);
 
 //----post----
 router.post('/', ticketController.newTicket);
