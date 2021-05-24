@@ -29,7 +29,7 @@ const qrcodeRoutes = require('./api/routes/qrcodeRoutes');
 /*  mongoose.connect(
      'mongodb://mounach:' +
      process.env.MONGO_ATLAS_PASSWORD + 
-     '@nostroflix-shard-00-00-butgu.mongodb.net:27017,nostroflix-shard-00-01-butgu.mongodb.net:27017,nostroflix-shard-00-02-butgu.mongodb.net:27017/test?ssl=true&replicaSet=nostroflix-shard-0&authSource=admin&retryWrites=true',
+     '------ url here -----',
      {
         useNewUrlParser: true,
         useFindAndModify: false

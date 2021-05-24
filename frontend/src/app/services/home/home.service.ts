@@ -9,7 +9,7 @@ export class HomeService {
 
  
   /* -------- */
-  private API_URL = environment.API_URL + "/cinema-service/";
+  private API_URL = environment.API_URL + "/api/cinemas";
 
 
   /* ----- */
@@ -19,7 +19,7 @@ export class HomeService {
   /* ------------- */
   getAllCinemas() {
     
-    return this.httpClient.get(this.API_URL + "cinema",
+    return this.httpClient.get(this.API_URL,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
